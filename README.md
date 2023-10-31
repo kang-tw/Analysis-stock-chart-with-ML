@@ -14,6 +14,5 @@
      e.g) csv, tsv, txt, json,....
 
 2. get data form https://data.krx.co.kr/contents/MDC/DATA/datasale/index.cmd?viewNm=MDCDATA007
-
-3. feedback after apply in ML
-
+3. cleanse data
+4. feedback after apply in model
