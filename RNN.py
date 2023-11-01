@@ -1,3 +1,4 @@
+import tensorflow as tf
 from keras import Sequential
 from keras.layers import Dense, LSTM, Dropout
 
@@ -15,11 +16,12 @@ model.add(Dense(units=1)) # fully connected layer 최종적인 모델의 결과�
 model.summary()
 
 
-
+ 
 
 
 model.compile(optimizer='adam', loss='mean_squared_error')
-model.fit(전처리 데이터 값, 전처리 결과값, epochs=70, batch_size=30)
+with tf.device("/device:GPU:0"): # GPU 설정 명령어 gpu를 인식할 경우 default로 잡을 수 있긴하다. 
+    model.fit(전처리 데이터 값, 전처리 결과값, epochs=70, batch_size=30)
 model.save('model_name.h5') # 학습된 데이터중에 잘 학습된 데이터가 존재한다면 모델 키핑
 
 pred_y = model.predict(test_X) # 예측된 y값 
