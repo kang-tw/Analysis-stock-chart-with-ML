@@ -16,4 +16,6 @@
 2. get data from https://data.krx.co.kr/contents/MDC/DATA/datasale/index.cmd?viewNm=MDCDATA007
 3. cleanse data
 4. feedback after apply in model
-5.
+
+#### aditional idea
+correlation with news by naver api
