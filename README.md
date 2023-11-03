@@ -21,8 +21,20 @@
 4. hosting results on web
 
  ## Project schedule
+![schedule](imgs/schedule.png)
 
+## Team roles & development areas
 
++ 강태웅   
+RNN 기반 모델 구축   
+데이터 베이스 암호화
+
++ 박상원   
+웹 페이지 개설 및 호스팅
+
++ 방호영   
+웹 크롤링   
+데이터 전처리
 
 ## required technologies  
 1. programming language   
