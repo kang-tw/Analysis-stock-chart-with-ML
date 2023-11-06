@@ -1,4 +1,4 @@
-# [RNN기반의 주식 플로우 차트 분석 및 딥웹 호스팅]   
+# [RNN기반의 주식 차트 분석 및 딥웹 호스팅]   
 
 ![image1](imgs/img_1.png)
  ## Abstract
