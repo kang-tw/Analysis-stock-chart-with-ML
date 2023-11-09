@@ -20,3 +20,4 @@
 #### aditional idea
 correlation with news by naver api
 preprocessing by Bard or Chat GPT's API
+...
