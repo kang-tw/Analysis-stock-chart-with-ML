@@ -9,7 +9,7 @@
    - setting the period of stock price data collection
      e.g) 1 year (2022~2023), ...
    - select timestamp
-     e.g) a date-wise, a week-wise, a month-wise
+     e.g) a date-wise, a week-wise, a month-wise, I'm stupid person -bang ho young- 
    - select extension type
      e.g) csv, tsv, txt, json,....
 
