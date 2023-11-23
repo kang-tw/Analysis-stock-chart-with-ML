@@ -1,11 +1,29 @@
 "use client";
 
 
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-export default function Create() {
+export default function Update() {
+    const [title, setTitle] = useState('');
+    const [body,setBody] = useState('');
+
     const router = useRouter();
+    const params = useParams();
+    const id = params.id;
 
+
+    useEffect(()=>{
+
+        fetch("http://localhost:9999/topic/"+id)
+        .then(resp=>resp.json())
+        .then(result=>{
+            setTitle(result.title);
+            setBody(result.body);
+        });
+
+
+    },[])
 
 
     return(
@@ -33,10 +51,10 @@ export default function Create() {
         }}>
 
         <p>
-            <input type="text" name ="title" placeholder="title"/>
+            <input type="text" name ="title" placeholder="title" value ={title}/>
         </p>
         <p>
-            <textarea name ="body" placeholder="body"></textarea>
+            <textarea name ="body" placeholder="body" value={body}></textarea>
         </p>
 
         <p>

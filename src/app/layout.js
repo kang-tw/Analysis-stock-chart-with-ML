@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import './globals.css'
 
-
+import {Control} from './Control';
 
 export const metadata = {
   title: 'IT"s my web tutorial',
@@ -10,10 +10,11 @@ export const metadata = {
  
 export default async function RootLayout({ children }) {
 
-const resp = await fetch("http://localhost:9999/topics");
-const topics = await resp.json();
-  return (
 
+const resp = await fetch("http://localhost:9999/topic",{next:{revalidate:0 }});
+const topics = await resp.json();
+
+  return (
 
     <html>
       <body>
@@ -21,18 +22,12 @@ const topics = await resp.json();
         <ol>
           {topics.map((topic)=>{
             return <li key = {topic.id}><Link href={`/read/${topic.id}`}>{topic.title}</Link></li>
+           
           })}
         </ol>
 
-
-        
         {children}
-        <ul>
-          <li><Link href="/create">Create</Link></li>
-          <li><Link href="/update/1">Update</Link></li>
-          <li><input type="button" value= "delete"/></li>
-        </ul>
-
+       <Control />
 
         
         </body>

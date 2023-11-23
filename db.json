@@ -1,4 +1,16 @@
 {
+  "topic": [
+    {
+      "id": "1",
+      "title": "html",
+      "body": "html is...."
+    },
+    {
+      "id": "2",
+      "title": "CSS",
+      "body": "CSS is...."
+    }
+  ],
   "posts": [
     {
       "id": 1,
@@ -15,15 +27,5 @@
   ],
   "profile": {
     "name": "typicode"
-  },
-
-  "topics": [
-    
-    {"id":1,"title":"HTML", "body":"html is ...."},
-    {"id":2,"title":"CSS", "body":"css is ...."}
-    
-  ]
-
-
-
+  }
 }
