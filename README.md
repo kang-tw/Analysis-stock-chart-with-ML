@@ -5,6 +5,5 @@
 기본적인 로그인 화면 생성
 
 ## 구상
-회원가입 후 로그인
-
-한가지 주식에 대한 예측 가격들 표시
+next.js와 next-auth 라이브러리를 이용하여 구현
+typescript & tailwindCSS적용?
