@@ -1,42 +1,51 @@
-import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler
+import pandas as pd
+from control_CSV import csv_data
+
+csv_file_path = './real_result.csv'
+real_result = pd.read_csv(csv_file_path)
+real_result = real_result.iloc[1:, :]
+
+def min_max_Scaler(data):
+    return (data - np.min(data, 0) )/ (np.max(data, 0) - np.min(data, 0) + 1e-15)
 
 
-# CSV 파일을 불러오기
-csv_file_path = './fin_output.csv'
-csv_data = pd.read_csv(csv_file_path)
+csv_data = min_max_Scaler(csv_data)
+real_result=min_max_Scaler(real_result)
 
-csv_data.drop('date', axis=1, inplace=True)
-
-def make_neg(series):
-    return (series - series.min()) / (series.max() - series.min())
-
-def create_sequences(data, sequence_length):
-    sequences = []
-    for i in range(len(data) - sequence_length + 1):
-        sequence = data.iloc[i:i + sequence_length].values
-        sequences.append(sequence)
-    return np.array(sequences)
+csv_data = csv_data.values.tolist()
+real_result = real_result.values.tolist()
 
 
 
-csv_data['fitting_weight'] = csv_data['weight'] - csv_data['weight'].mean()
-#0~5의 데이터를 -2.5~2.5로 변환
+data = []
+data_result = []
 
-scaler = StandardScaler()
-csv_data['fitting_weight_scaled'] = scaler.fit_transform(csv_data[['fitting_weight']])
-#fitting_weight 데이터를 0~1의 정규 분포 데이터로 변환
-#csv_data['weighted_avg'] = (csv_data['Open'] + csv_data['High'] + csv_data['Low'] + csv_data['Close']) / 4 * csv_data['fitting_weight_scaled']
+size=5
 
-csv_data.drop('weight', axis=1, inplace=True)
-csv_data.drop('Volume', axis=1, inplace=True)
-csv_data.drop('fitting_weight', axis=1, inplace=True)
-csv_data.drop('fitting_weight_scaled', axis=1, inplace=True)
+for i in range(len(real_result) - size): # 5일간의 데이터로 다음날의 주가 예측 
+    temp_data = csv_data[i : i + size] 
+    temp_result = real_result[i + size]     
+    data.append(temp_data)
+    data_result.append(temp_result)
 
 
 
 
 
 
+train_size = int(len(data_result) * 0.7)
+train_data = np.array(data[0 : train_size])
+train_result = np.array(data_result[0 : train_size])
 
+
+test_size = len(data_result) - train_size
+test_data = np.array(data[train_size : len(data)])
+test_result = np.array(data_result[train_size : len(data_result)])
+
+
+
+print(train_data.shape)
+print(train_result.shape)
+train_data =train_data[:-1]
+train_result =train_result[:-1]
