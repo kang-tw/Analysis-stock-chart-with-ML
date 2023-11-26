@@ -4,9 +4,15 @@ from sklearn.preprocessing import StandardScaler
 
 
 # CSV 파일을 불러오기
-csv_file_path = './fin_output.csv'
+csv_file_path = './ETHUSDT.csv'
 
 csv_data = pd.read_csv(csv_file_path)
+
+
+
+
+
+
 #csv_data.drop('Volume', axis=1, inplace=True)
 #csv_data.drop('date', axis=1, inplace=True)
 
