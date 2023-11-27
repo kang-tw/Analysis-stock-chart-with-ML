@@ -24,7 +24,7 @@ preprocessing by Bard or Chat GPT's API
 
 #### workflow
 1. crawling with opensource API yfinance (yahoo finace) - done
-2. get news data (make crawler)
+2. get news data (make crawler) - done
 3. make weight (pos-neg value by chat gpt)
 4. merge data set !
    
