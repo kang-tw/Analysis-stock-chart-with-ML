@@ -31,7 +31,7 @@ for index_val in df.index:
             tmp_list.append({'title': title.text, 'summary': summ.text})
 
         news_dic[str_index] = tmp_list
-                # 결과를 JSON 파일에 저장
+                # save as json
         with open('samsung_news.json', 'w', encoding='utf-8') as json_file:
             json.dump(news_dic, json_file, ensure_ascii=False, indent=4)
 
