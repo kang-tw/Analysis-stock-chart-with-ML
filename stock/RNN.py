@@ -13,11 +13,11 @@ csv_data = pd.read_csv(path)
 
 
 model = Sequential()
-model.add(LSTM(units=100, activation='relu', input_shape=(20, 5),return_sequences=True))
-model.add(Dropout(0.15)) # 과적합 방지 랜덤한 10프로의 모듈 비활성화
+model.add(LSTM(units=100, activation='tanh', input_shape=(20, 5),return_sequences=True))
+#model.add(Dropout(0.15)) # 과적합 방지 랜덤한 10프로의 모듈 비활성화
 
-model.add(LSTM(units=100, activation='relu'))
-model.add(Dropout(0.15))   
+model.add(LSTM(units=100, activation='tanh'))
+#model.add(Dropout(0.15))   
    
 
 optimizer = Adam(learning_rate=0.0015)
@@ -28,7 +28,7 @@ model.compile(optimizer=optimizer, loss='mean_squared_error')
 
 
 with tf.device("/device:GPU:0"): # GPU 설정 명령어 gpu를 인식할 경우 default로 잡을 수 있긴하다. 
-    model.fit(train_data, train_result, epochs=100, batch_size=10)
+    model.fit(train_data, train_result, epochs=80, batch_size=10)
     pred_y = model.predict(test_data)
 
 model.save('model_RNN.h5') # 학습된 데이터중에 잘 학습된 데이터가 존재한다면 모델 키핑
@@ -49,5 +49,8 @@ plt.legend()
 plt.grid()
 plt.show()
 
+
+np.savetxt('samsung_output.csv', test_result, delimiter=',')
+np.savetxt('samsung_pred_output.csv', pred_y, delimiter=',')
 
 print("내일 삼성전자 주가 :", csv_data['Close'].iloc[-1] * pred_y[-1] /data_result[-1], 'KRW')

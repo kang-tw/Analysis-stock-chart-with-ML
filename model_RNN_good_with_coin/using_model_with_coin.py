@@ -19,7 +19,6 @@ model.summary()
 pred_y = model.predict(test_data)
 
 
-
 plt.figure()
 plt.plot(test_result[5500:], color='red', label='real price')
 plt.plot(pred_y[5500:], color='blue', label='predicted price')
@@ -34,6 +33,10 @@ plt.ylabel('price')
 plt.legend()
 plt.grid()
 plt.show()
+
+
+np.savetxt('ETH_output.csv', test_result, delimiter=',')
+np.savetxt('ETH_pred_output.csv', pred_y, delimiter=',')
 
 
 print("이번 이더리움 가격:", csv_data['Close'].iloc[-1] * pred_y[-1] /data_result[-1], 'USD')
