@@ -12,6 +12,7 @@
 ![image1](pictures/gpt_mid_result.png)
 
 5. 데이터 통합 및 모델 수행 후 피드백
+
 ![image2](pictures/concat_mid_result.png)
 
    - 피드백 결과 gpt를 이용해 얻은 가중치를 버리기로함
