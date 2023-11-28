@@ -1,7 +1,5 @@
 # opensource
 ### Data-Crawling
-![image1](pictures/concat_mid_result.png)
-
 #### workflow
 ---------------------------------------------------------------------------
 1. yfinance API를 이용한 주가 데이터 추출
