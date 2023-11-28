@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.axis--x path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 3px;
+}
+.line1 {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+</style>
+<div>Pridiction of Stock (Samsung)
+  <svg id ="plot_samsung"width="960" height="500"></svg>
+</div>
+<div>Pridiction of Bitcoin (ETH)
+  <svg id ="plot_ETH"width="960" height="500"></svg>
+</div>
+
+
+<script src="//d3js.org/d3.v4.min.js"></script>
+<script>
+// plot 1 - samsung
+var svg = d3.select("#plot_samsung"),
+    margin = {top: 20, right: 80, bottom: 30, left: 50},
+    width = svg.attr("width") - margin.left - margin.right,
+    height = svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var parseTime1 = d3.timeParse("%Y-%m-%d");
+
+var x = d3.scaleTime().range([0, width]),
+    y = d3.scaleLinear().range([height, 0]),
+    z = d3.scaleOrdinal(d3.schemeCategory10);
+
+var line = d3.line()
+    .curve(d3.curveBasis)
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.temperature); });
+
+d3.tsv("plot_samsung.tsv", type, function(error, data) {
+  if (error) throw error;
+
+  var cities = data.columns.slice(1).map(function(id) {
+    return {
+      id: id,
+      values: data.map(function(d) {
+        return {date: d.date, temperature: d[id]};
+      })
+    };
+  });
+
+  x.domain(d3.extent(data, function(d) { return d.date; }));
+
+  y.domain([
+    d3.min(cities, function(c) { return d3.min(c.values, function(d) { return d.temperature; }); }),
+    d3.max(cities, function(c) { return d3.max(c.values, function(d) { return d.temperature; }); })
+  ]);
+
+  z.domain(cities.map(function(c) { return c.id; }));
+
+  g.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+  g.append("g")
+      .attr("class", "axis axis--y")
+      .call(d3.axisLeft(y))
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("fill", "#000")
+      .text("price_value");
+
+  var city = g.selectAll(".city")
+    .data(cities)
+    .enter().append("g")
+      .attr("class", "city");
+
+  city.append("path")
+      .attr("class", "line")
+      .attr("d", function(d) { return line(d.values); })
+      .style("stroke", function(d) { return z(d.id); });
+
+  city.append("text")
+      .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
+      .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
+      .attr("x", 3)
+      .attr("dy", "0.35em")
+      .style("font", "0px sans-serif")
+      .text(function(d) { return d.id; });
+
+  
+});
+
+function type(d, _, columns) {
+  d.date = parseTime1(d.date);
+  for (var i = 1, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
+  return d;
+}
+// Handmade legend
+svg.append("circle").attr("cx",90).attr("cy",130).attr("r", 6).style("fill", "#FF7F0E")
+svg.append("circle").attr("cx",90).attr("cy",160).attr("r", 6).style("fill", "#1F77B4")
+svg.append("text").attr("x", 110).attr("y", 135).text("Predicted price").style("font-size", "15px").attr("alignment-baseline","left")
+svg.append("text").attr("x", 110).attr("y", 165).text("Real Price").style("font-size", "15px").attr("alignment-baseline","left")
+// plot 2 - ETH
+var parseTime2 = d3.timeParse("%Y-%m-%d");
+var svg2 = d3.select("#plot_ETH"),
+    gETH = svg2.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    d3.tsv("plot_eth.tsv", type, function(error, data) {
+      if (error) throw error;
+    
+      var cities = data.columns.slice(1).map(function(id) {
+        return {
+          id: id,
+          values: data.map(function(d) {
+            return {date: d.date, temperature: d[id]};
+          })
+        };
+      });
+    
+      x.domain(d3.extent(data, function(d) { return d.date; }));
+    
+      y.domain([
+        d3.min(cities, function(c) { return d3.min(c.values, function(d) { return d.temperature; }); }),
+        d3.max(cities, function(c) { return d3.max(c.values, function(d) { return d.temperature; }); })
+      ]);
+    
+      z.domain(cities.map(function(c) { return c.id; }));
+    
+      gETH.append("g")
+          .attr("class", "axis axis--x")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x));
+    
+      gETH.append("g")
+          .attr("class", "axis axis--y")
+          .call(d3.axisLeft(y))
+        .append("text")
+          .attr("transform", "rotate(-90)")
+          .attr("y", 6)
+          .attr("dy", "0.71em")
+          .attr("fill", "#000")
+          .text("price_value");
+    
+      var cityETH = gETH.selectAll(".city")
+        .data(cities)
+        .enter().append("g")
+          .attr("class", "city");
+    
+      cityETH.append("path")
+          .attr("class", "line1")
+          .attr("d", function(d) { return line(d.values); })
+          .style("stroke", function(d) { return z(d.id); });
+    
+      cityETH.append("text")
+          .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
+          .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
+          .attr("x", 3)
+          .attr("dy", "0.35em")
+          .style("font", "0px sans-serif")
+          .text(function(d) { return d.id; });
+    
+      
+    });
+    
+
+// Handmade legend
+svg2.append("circle").attr("cx",90).attr("cy",130).attr("r", 6).style("fill", "#FF7F0E")
+svg2.append("circle").attr("cx",90).attr("cy",160).attr("r", 6).style("fill", "#1F77B4")
+svg2.append("text").attr("x", 110).attr("y", 135).text("Predicted price").style("font-size", "15px").attr("alignment-baseline","left")
+svg2.append("text").attr("x", 110).attr("y", 165).text("Real Price").style("font-size", "15px").attr("alignment-baseline","left")
+
+</script>
