@@ -11,7 +11,7 @@
 ![Sample Gantt](/imgs/gantt.png)
 
 ### Project Screenshot
-![Sample UI](/imgs/sample-ui.png)
+![Sample UI](/imgs/midresult.png)
 
 
 ## Individual Progress Status
