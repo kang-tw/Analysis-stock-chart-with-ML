@@ -16,8 +16,8 @@
 
 ## Individual Progress Status
 ### 강태웅
-* RNN 학습 모델 구성및 간단한 결과 도출. ([Commit Link](https://github.com/kang-tw/Analysis-stock-chart-with-ML/commit/135c71aadb68456baa67624984cacd457943b880))
-* 도출된 데이터로 학습및 결과도출 후 피드백(삼성전자). ([Commit Link](https://github.com/kang-tw/Analysis-stock-chart-with-ML/commit/779be4463e1394b984dd132006959fe38daacec9))
+* RNN 학습 모델 구성 및 간단한 결과 도출. ([Commit Link](https://github.com/kang-tw/Analysis-stock-chart-with-ML/commit/135c71aadb68456baa67624984cacd457943b880))
+* 도출된 데이터로 학습 및 결과도출 후 피드백(삼성전자). ([Commit Link](https://github.com/kang-tw/Analysis-stock-chart-with-ML/commit/779be4463e1394b984dd132006959fe38daacec9))
 * 피드백 결과로 학습에 더 유용한 데이터(이더리움)를 이용한 학습 및 결과 도출. ([Commit Link](https://github.com/kang-tw/Analysis-stock-chart-with-ML/commit/ab71b55877baa33363605332639ed74d6f7cb4df))
 * Nextjs를 이용한 백엔드 구성  ([Commit Link](https://github.com/kang-tw/Analysis-stock-chart-with-ML/tree/backend))
 
