@@ -19,7 +19,7 @@ data = []
 data_result = []
 
 size= 1
-result_size = size
+
 
 for i in range(len(real_result) - size): # 15분의 데이터 4개 마디로 총 1시간의 데이터를 보고 새로운 가격 예측 
     temp_data = csv_data[i : i + size] 
@@ -31,12 +31,12 @@ for i in range(len(real_result) - size): # 15분의 데이터 4개 마디로 총
 
 train_size = int(len(data_result) * 0.8)
 train_data = np.array(data[0 : train_size])
-train_result = np.array(data_result[0 : train_size])
+train_result = np.array(data_result[1 : train_size+1])
 
 
 
-test_data = np.array(data[train_size : ])
-test_result = np.array(data_result[train_size : ])
+test_data = np.array(data[train_size+1 : ])
+test_result = np.array(data_result[train_size+2 : ])
 
 
 # print(train_data.shape)

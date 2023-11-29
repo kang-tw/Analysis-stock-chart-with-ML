@@ -28,5 +28,6 @@ with tf.device("/device:GPU:0"): # GPU 설정 명령어 gpu를 인식할 경우 
     model.fit(train_data, train_result, epochs=50, batch_size=200)
  
 
+
 model.save('model_RNN.h5') # 학습된 데이터중에 잘 학습된 데이터가 존재한다면 모델 키핑
 

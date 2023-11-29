@@ -35,8 +35,12 @@ plt.grid()
 plt.show()
 
 
-np.savetxt('ETH_output.csv', test_result, delimiter=',')
-np.savetxt('ETH_pred_output.csv', pred_y, delimiter=',')
+
 
 
 print("이번 이더리움 가격:", csv_data['Close'].iloc[-1] * pred_y[-1] /data_result[-1], 'USD')
+
+
+
+# def min_max_Scaler(data):
+#     return (data - np.min(data, 0) )/ (np.max(data, 0) - np.min(data, 0) + 1e-15)
