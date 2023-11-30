@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 
 
-# CSV 파일을 불러오기
+# CSV 파일을 불러오기#diverge check
 csv_file_path = './fin_output.csv'
 
 csv_data = pd.read_csv(csv_file_path)
