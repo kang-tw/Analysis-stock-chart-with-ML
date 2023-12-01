@@ -88,13 +88,6 @@
 
 })(jQuery);
 
-// 가입된 사용자 정보 (예제를 위해 간단히 하드코딩)
-const registeredUsers = [
-    { username: 'user1@naver.com', password: 'pass1' },
-    { username: 'user2@naver.com', password: 'pass2' },
-    // ... 추가 사용자 정보
-];
-
 function login() {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
@@ -122,6 +115,47 @@ function login_success() {
 }
 
 function sign_up() {
-    alert('회원 가입 하세요');
+    alert('회원가입을 진행합니다');
     window.location.href = 'sign_up.html';
+}
+
+function logout() {
+    alert('로그아웃을 진행합니다');
+    window.location.href = 'index.html';
+}
+
+let registeredUsers = JSON.parse(localStorage.getItem('registeredUsers')) || 
+[
+{ username: 'user1@naver.com', password: 'pass1' },
+{ username: 'user2@naver.com', password: 'pass2' },
+];//DB
+
+function addUser() {
+
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const username = usernameInput.value;
+    const password = passwordInput.value;
+
+    // 이미 등록된 사용자인지 확인
+    const userExists = registeredUsers.some(user => user.username === username || user.password === password);
+
+    if (userExists) {
+        alert('이미 등록된 사용자입니다.');
+    } else {
+        // 새로운 사용자 정보를 추가
+        registeredUsers.push({ username, password });
+        localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+        alert('사용자가 성공적으로 추가되었습니다.');
+        sign_up_success();
+    }
+
+    // 폼 초기화
+    usernameInput.value = '';
+    passwordInput.value = '';
+}
+
+
+function sign_up_success() {
+    window.location.href = 'index.html';
 }
