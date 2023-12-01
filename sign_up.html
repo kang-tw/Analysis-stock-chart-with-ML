@@ -41,24 +41,22 @@
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-						<input class="input100" type="text" name="email" id="username">
+						<input class="input100" type="text" name="email" id="username" autocomplete="off">
 						<span class="focus-input100" data-placeholder="Email"></span>
-						<!-- <input type="text" id="username" required> -->
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						<input class="input100" type="password" name="pass" id="password">
+						<input class="input100" type="password" name="pass" id="password" autocomplete="off">
 						<span class="focus-input100" data-placeholder="Password"></span>
-						<!-- <input type="password" id="password" required> -->
 					</div>
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" onclick="login()">
+							<button class="login100-form-btn" onclick="addUser()">
 								Create Account
 							</button>
 						</div>
@@ -68,12 +66,6 @@
 						<span class="txt1">
 							<!-- Don’t have an account? -->
 						</span>
-
-						<a class="txt2" href="#">
-							<button onClick="sign_up()">
-								Sign Up
-							</button>
-						</a>
 					</div>
 				</form>
 			</div>
