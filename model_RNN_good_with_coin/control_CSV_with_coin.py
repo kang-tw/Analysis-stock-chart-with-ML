@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 
 
-# CSV 파일을 불러오기
+# CSV 파일을 불러오기#check diverge
 csv_file_path = './ETHUSDT.csv'
 
 csv_data = pd.read_csv(csv_file_path)
