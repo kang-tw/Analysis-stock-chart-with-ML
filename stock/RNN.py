@@ -51,8 +51,6 @@ while(True):
          count = 0
     
 
-
-
 model.save('model_RNN.h5') # 학습된 데이터중에 잘 학습된 데이터가 존재한다면 모델 키핑
 
 
@@ -70,8 +68,6 @@ plt.xticks(x_values)
 plt.legend()
 plt.grid()
 plt.show()
-
-
 np.savetxt('samsung_output.csv', test_result, delimiter=',')
 np.savetxt('samsung_pred_output.csv', pred_y, delimiter=',')
 
