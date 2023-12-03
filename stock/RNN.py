@@ -1,6 +1,6 @@
 import tensorflow as tf
 from keras import Sequential
-from keras.layers import Dense, LSTM, Dropout
+from keras.layers import Dense, LSTM, Dropout,Flatten
 from data_processing import train_data,train_result,test_data,test_result ,data_result
 from keras.optimizers import Adam
 import matplotlib.pyplot as plt
@@ -11,25 +11,47 @@ path = './fin_output.csv'
 csv_data = pd.read_csv(path)
 
 
+def make_model():
+    model = Sequential()
+    model.add(LSTM(units=128, activation='tanh', input_shape=(20, 5),return_sequences=True))
+    model.add(Dropout(0.05)) # 과적합 방지 랜덤한 10프로의 모듈 비활성화
+    model.add(LSTM(units=64, activation='tanh',return_sequences=True))
+    model.add(Dropout(0.05))  
+    model.add(LSTM(units=32, activation='tanh'))
 
-model = Sequential()
-model.add(LSTM(units=100, activation='tanh', input_shape=(20, 5),return_sequences=True))
-#model.add(Dropout(0.15)) # 과적합 방지 랜덤한 10프로의 모듈 비활성화
+    optimizer = Adam(learning_rate=0.0015)
+    model.add(Flatten())
+    model.add(Dense(units=1,activation ='tanh')) # fully connected layer 최종적인 모델의 결과값을 도출하기 위해 사용 
 
-model.add(LSTM(units=100, activation='tanh'))
-#model.add(Dropout(0.15))   
-   
-
-optimizer = Adam(learning_rate=0.0015)
-model.add(Dense(units=1)) # fully connected layer 최종적인 모델의 결과값을 도출하기 위해 사용 
-#model.summary()
-model.compile(optimizer=optimizer, loss='mean_squared_error')
+    model.compile(optimizer=optimizer, loss='mean_squared_error')
+    return model
 
 
+hit =0
+count = 0
+model = make_model()
 
-with tf.device("/device:GPU:0"): # GPU 설정 명령어 gpu를 인식할 경우 default로 잡을 수 있긴하다. 
-    model.fit(train_data, train_result, epochs=80, batch_size=10)
+
+while(True):
+    count =count+1
+    with tf.device("/device:GPU:0"): # GPU 설정 명령어 gpu를 인식할 경우 default로 잡을 수 있긴하다. 
+        model.fit(train_data, train_result, epochs=10, batch_size=10)
     pred_y = model.predict(test_data)
+    avg=0
+    for i,j in zip(pred_y,test_result):
+        avg += abs(1 -j/i)
+        
+    avg= avg/len(pred_y) * 100
+    print(avg)
+    
+    if(avg<8.3):hit=hit+1
+    if(hit == 2): break
+    if(count == 30):
+         model=make_model()
+         count = 0
+    
+
+
 
 model.save('model_RNN.h5') # 학습된 데이터중에 잘 학습된 데이터가 존재한다면 모델 키핑
 
