@@ -20,8 +20,8 @@ pred_y = model.predict(test_data)
 
 
 plt.figure()
-plt.plot(test_result[5500:], color='red', label='real price')
-plt.plot(pred_y[5500:], color='blue', label='predicted price')
+plt.plot(test_result, color='red', label='real price')
+plt.plot(pred_y, color='blue', label='predicted price')
 plt.title('price prediction')
 
 x_values = np.arange(len(pred_y))
