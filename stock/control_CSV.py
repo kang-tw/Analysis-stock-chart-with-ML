@@ -3,16 +3,15 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 
 
+<<<<<<< HEAD:model_RNN_good_with_coin/control_CSV_with_coin.py
 # CSV 파일을 불러오기#check diverge
 csv_file_path = './ETHUSDT.csv'
+=======
+# CSV 파일을 불러오기#diverge check
+csv_file_path = './fin_output.csv'
+>>>>>>> 257d6b8cd2691e717509d4246eae08eb7a36c12b:stock/control_CSV.py
 
 csv_data = pd.read_csv(csv_file_path)
-
-
-
-
-
-
 #csv_data.drop('Volume', axis=1, inplace=True)
 #csv_data.drop('date', axis=1, inplace=True)
 

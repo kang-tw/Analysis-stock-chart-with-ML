@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
-from control_CSV_with_coin import csv_data
+from control_CSV import csv_data
 
-csv_file_path = './real_result_with_coin.csv'
+csv_file_path = './real_result.csv'
 real_result = pd.read_csv(csv_file_path)
 real_result = real_result.iloc[1:, :]
 
@@ -18,10 +18,10 @@ real_result = real_result.values.tolist()
 data = []
 data_result = []
 
-size= 1
+size= 20
+result_size = size
 
-
-for i in range(len(real_result) - size): # 15분의 데이터 4개 마디로 총 1시간의 데이터를 보고 새로운 가격 예측 
+for i in range(len(real_result) - size): # 5일간의 데이터로 다음날의 주가 예측 
     temp_data = csv_data[i : i + size] 
     temp_result = real_result[i + size]     
     data.append(temp_data)
@@ -29,14 +29,15 @@ for i in range(len(real_result) - size): # 15분의 데이터 4개 마디로 총
 
 
 
-train_size = int(len(data_result) * 0.8)
+train_size = int(len(data_result) * 0.7)
 train_data = np.array(data[0 : train_size])
-train_result = np.array(data_result[1 : train_size+1])
+train_result = np.array(data_result[0 : train_size])
 
 
+#test_size = len(data_result) - train_size
+test_data = np.array(data[train_size : ])
+test_result = np.array(data_result[train_size : ])
 
-test_data = np.array(data[train_size+1 : ])
-test_result = np.array(data_result[train_size+2 : ])
 
 
 # print(train_data.shape)
