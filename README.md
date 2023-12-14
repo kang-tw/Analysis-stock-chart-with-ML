@@ -1,5 +1,5 @@
 # [RNN기반의 주식 차트 분석 및 딥웹 호스팅]   
-
+https://oss-2023.web.app/
 ![image1](imgs/img_1.png)
  ## Abstract
     
@@ -35,6 +35,7 @@ RNN 기반 모델 구축
 + 방호영   
 웹 크롤링   
 데이터 전처리
+백엔드 연결
 
 ## required technologies  
 1. programming language   
