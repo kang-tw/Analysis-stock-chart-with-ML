@@ -1,2 +1,3 @@
-implement back-end with firebase
-implement front-end with react
+implement back-end with firebase - fin
+
+implement front-end with react - fin
